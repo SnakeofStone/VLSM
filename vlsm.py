@@ -27,7 +27,8 @@ def parse_network_ID(id: str) -> tuple:
     if 4 == len(networkID):
         decimal_network_ID = 0
         for element in range(len(networkID)):
-            decimal_network_ID += int(networkID[element])<<(32 - 8*(element + 1))
+            decimal_network_ID += int(networkID[element]) << \
+                                  (32 - 8*(element + 1))
 
     else:
         print("Error: Invalid network ID")
@@ -35,7 +36,8 @@ def parse_network_ID(id: str) -> tuple:
 
     return decimal_network_ID, decimalMask
 
-def get_network_and_mask(decimal_network_ID: int, decimal_network_mask: int) -> tuple:
+def get_network_and_mask(decimal_network_ID: int, 
+                         decimal_network_mask: int) -> tuple:
     """
     Accept the integer values for the network ID and subnet mask;
     return a formatted string for the network ID and integer value
@@ -67,7 +69,7 @@ def get_decimal_mask(rawMask: int) -> str:
     """
     Returns a formated string for network subnet mask in octets
     """
-    mask = "{}.{}.{}.{}".format(rawMask>>24, \
+    mask = "{}.{}.{}.{}".format((rawMask>>24) & 0xFF, \
         (rawMask>>16) & 0xFF, (rawMask>>8) & 0xFF, \
         rawMask & 0xFF)
 
@@ -130,8 +132,9 @@ if "__main__" == __name__:
     ]
     output_table.append(table_header)
 
+    decimal_network_ID, decimal_network_mask = parse_network_ID(net_ID)
+
     for network in networks:
-        decimal_network_ID, decimal_network_mask = parse_network_ID(net_ID)
 
         row = []
         row.append(network)
@@ -148,13 +151,16 @@ if "__main__" == __name__:
 
         network_id, network_mask = get_network_and_mask(decimal_network_ID,
                                                         decimal_network_mask)
+        decimal_network_ID += found_hosts + 2
 
         row.append(network_id)
         row.append("/{}".format(32 - N))
 
-        decimal_network_ID += found_hosts + 2
+        _, decimal_network_mask = parse_network_ID("0.0.0.0/{}".format(32 - N))
+        formatted_decimal_mask = get_decimal_mask(decimal_network_mask)
+        row.append(formatted_decimal_mask)
 
-        row.append(network_mask)
+
 
         output_table.append(row)
 
