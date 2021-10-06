@@ -135,13 +135,9 @@ if "__main__" == __name__:
     decimal_network_ID, decimal_network_mask = parse_network_ID(net_ID)
 
     for network in networks:
-
         row = []
         row.append(network)
         row.append(networks[network])
-
-        print("Network: {}".format(network))
-        print("Hosts: {}\n".format(networks[network]))
 
         N, found_hosts, new_network_ID = add_hosts_to_network(
             decimal_network_ID, decimal_network_mask, networks[network])
