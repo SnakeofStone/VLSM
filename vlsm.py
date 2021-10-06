@@ -1,5 +1,6 @@
 import math
 import json
+import gui
 
 def parse_network_ID(id: str) -> tuple:
     """
@@ -124,7 +125,7 @@ if "__main__" == __name__:
         "N",
         "Hosts encontrados",
         "Direccion de red",
-        "Mascara",
+        "Máscara",
         "Mascara decimal punteada",
         "Primera IP utilizable",
         "Ultima IP utilizable",
@@ -165,5 +166,7 @@ if "__main__" == __name__:
 
         output_table.append(row)
 
-    for row in output_table:
-        print(row)
+    window = gui.create_window()
+    window.wm_title("VLSM")
+    t = gui.OutputTable(window, output_table)
+    window.mainloop()

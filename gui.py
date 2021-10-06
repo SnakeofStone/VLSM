@@ -1,20 +1,16 @@
-import gi
+import tkinter
 
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+class OutputTable:
+    def __init__(self, root, data):
+        self.window = tkinter.Entry(root)
 
-class OutputTable(Gtk.Window):
-    def __init__(self, n_rows, data):
-        super().__init__(title="VLSM")
-        
-        table = Gtk.Table(n_rows = n_rows, n_columns = 9, homogeneous = True)
-        self.add(table)
+        for i in range(len(data)):
+            for j in range(len(data[0])):
+                self.e = tkinter.Entry(root, width=20, 
+                                       font=('Arial', '16', 'bold'))
 
-        """for point in data:
-            label = Gtk.Label()"""
+                self.e.grid(row=i, column=j)
+                self.e.insert(tkinter.END, data[i][j])
 
-window = OutputTable(10, [])
-window.connect("destroy", Gtk.main_quit)
-#window.set_default_size(1500, 500)
-window.show_all()
-Gtk.main()
+def create_window() -> tkinter.Tk:
+    return tkinter.Tk()
