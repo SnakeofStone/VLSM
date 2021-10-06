@@ -151,7 +151,6 @@ if "__main__" == __name__:
 
         network_id, network_mask = get_network_and_mask(decimal_network_ID,
                                                         decimal_network_mask)
-        decimal_network_ID += found_hosts + 2
 
         row.append(network_id)
         row.append("/{}".format(32 - N))
@@ -160,7 +159,13 @@ if "__main__" == __name__:
         formatted_decimal_mask = get_decimal_mask(decimal_network_mask)
         row.append(formatted_decimal_mask)
 
+        row.append(get_decimal_mask(decimal_network_ID + 1))
+        row.append(get_decimal_mask(decimal_network_ID + found_hosts))
+        
+        broadcast = get_decimal_mask(decimal_network_ID + found_hosts + 1) 
+        row.append(broadcast)
 
+        decimal_network_ID += found_hosts + 2
 
         output_table.append(row)
 
