@@ -91,7 +91,6 @@ def add_hosts_to_network(decimal_network_ID: int, decimal_network_mask: int,
     Return:
     - N: The power of 2 used to calculate the foundHosts var
     - foundHosts: The value of the next power of 2 of the requiredHosts
-    - decimal_network_ID + foundHosts: The last usable IP of the subnet
     """
     N = math.ceil(math.log2(requiredHosts))
     _, mask = get_network_and_mask(decimal_network_ID, decimal_network_mask)
@@ -105,7 +104,7 @@ def add_hosts_to_network(decimal_network_ID: int, decimal_network_mask: int,
     else:
         foundHosts = 2**N - 2
 
-    return N, foundHosts, decimal_network_ID + foundHosts
+    return N, foundHosts
 
 if "__main__" == __name__:
     try:
@@ -143,7 +142,7 @@ if "__main__" == __name__:
         row.append(network)
         row.append(networks[network])
 
-        N, found_hosts, new_network_ID = add_hosts_to_network(
+        N, found_hosts = add_hosts_to_network(
             decimal_network_ID, decimal_network_mask, networks[network])
         total_hosts += found_hosts
 
