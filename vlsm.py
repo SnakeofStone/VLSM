@@ -135,6 +135,9 @@ if "__main__" == __name__:
 
     decimal_network_ID, decimal_network_mask = parse_network_ID(net_ID)
 
+    total_hosts = 0
+    max_hosts = 2**(32 - int(net_ID.split('/')[1])) - 2
+
     for network in networks:
         row = []
         row.append(network)
@@ -142,6 +145,7 @@ if "__main__" == __name__:
 
         N, found_hosts, new_network_ID = add_hosts_to_network(
             decimal_network_ID, decimal_network_mask, networks[network])
+        total_hosts += found_hosts
 
         row.append(N)
         row.append(found_hosts)
@@ -165,6 +169,10 @@ if "__main__" == __name__:
         decimal_network_ID += found_hosts + 2
 
         output_table.append(row)
+
+    if total_hosts > max_hosts:
+        print("Error! Unable to fulfill the required hosts given the subnet mask")
+        exit(-1)
 
     window = gui.create_window()
     window.wm_title("VLSM")

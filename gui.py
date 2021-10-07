@@ -1,9 +1,7 @@
 import tkinter
 
 class OutputTable:
-    def __init__(self, root, data):
-        self.window = tkinter.Entry(root)
-
+    def __init__(self, root: tkinter.Tk, data: list):
         for i in range(len(data)):
             for j in range(len(data[0])):
                 self.e = tkinter.Entry(root, width=20, 
