@@ -117,6 +117,9 @@ if "__main__" == __name__:
                placed in the same directory.")
         exit(-1)
 
+    # Sort networks in descending order of number of hosts
+    networks = {k: v for k, v in sorted(networks.items(), key=lambda item: item[1], reverse=True)} 
+
     output_table = []
     table_header = [
         "Redes",

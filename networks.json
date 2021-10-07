@@ -2,10 +2,10 @@
     "net_id": "192.168.0.0/24",
     "networks": 
     {
-        "Red C": 80,
-        "Red B": 20,
-        "Red D": 20,
         "Red A": 2,
+        "Red B": 20,
+        "Red C": 80,
+        "Red D": 20,
         "Red E": 2,
         "Red F": 2
     }
