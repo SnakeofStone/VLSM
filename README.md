@@ -11,4 +11,4 @@ This program can be run in three simple steps
 - In your terminal go to the source folder for the repository and run python vlsm.py
 
 ### Sample output
-!(VLSM format)[./output.png]
+![VLSM Table](https://raw.githubusercontent.com/SnakeofStone/VLSM/master/output.png)
