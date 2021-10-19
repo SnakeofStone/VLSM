@@ -128,7 +128,7 @@ if "__main__" == __name__:
         "Hosts encontrados",
         "Direccion de red",
         "Máscara",
-        "Mascara decimal punteada",
+        "Mascara decimal",
         "Primera IP utilizable",
         "Ultima IP utilizable",
         "Broadcast"
